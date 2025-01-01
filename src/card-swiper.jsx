@@ -15,7 +15,7 @@ import irizCar from './assets/iriz-car.png';
 import exoraCar from './assets/exora-car.png';
 
 const carData = [
-  { name: "X50", type: "Compact Crossover SUV", imageUrl: x50Car, url: x50Car},
+  { name: "X50", type: "Compact Crossover SUV", imageUrl: x50Car, url: x50Car },
   { name: "X70", type: "Mid-size SUV", imageUrl: x70Car, url: x70Car },
   { name: "X90", type: "Full-size SUV", imageUrl: x90Car, url: x90Car },
   { name: "S70", type: "Mid-size Sedan", imageUrl: s70Car, url: s70Car },
@@ -29,22 +29,22 @@ export default function SwiperApp() {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // Check if the device supports touch
+    // Check if the device supports touch events
     const checkTouchDevice = () => {
-      // Check if the platform is iOS or contains touch support
-      const userAgent = navigator.userAgent;
-      return (
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        /iPhone|iPad|iPod/.test(userAgent) // Handle iOS devices
+      setIsTouchDevice(
+        'ontouchstart' in window || navigator.maxTouchPoints > 0
       );
     };
-    setIsTouchDevice(checkTouchDevice());
-  }, []);
 
-  const handlePress = (url) => {
-    window.open(url, '_blank');
-  };
+    checkTouchDevice();
+
+    // Add event listener for window resize if you want to handle dynamic changes
+    window.addEventListener('resize', checkTouchDevice);
+
+    return () => {
+      window.removeEventListener('resize', checkTouchDevice);
+    };
+  }, []);
 
   return (
     <>
@@ -55,12 +55,9 @@ export default function SwiperApp() {
         navigation={true}
         modules={[Navigation]}
         className="w-[90%] sm:w-[80%] my-10"
-        breakpoints={{
-          // Ensure both larger and smaller screens (iPad/Tablet range) get touch behavior
-          1024: { allowTouchMove: isTouchDevice }, // Allow touch move only on touchscreen devices (on larger screens like iPad Pro)
-          768: { allowTouchMove: isTouchDevice },  // Allow touch move for iPads and tablets with smaller screens
-          0: { allowTouchMove: isTouchDevice },    // Allow touch move for mobile devices (just in case)
-        }}
+        touchStartPreventDefault={!isTouchDevice} // Disable touch events on non-touch devices
+        touchMoveStopPropagation={!isTouchDevice} // Prevent sliding interaction
+        allowTouchMove={isTouchDevice} // Only allow touch move on touch devices
       >
         {carData.map((car, index) => (
           <SwiperSlide key={index}>
