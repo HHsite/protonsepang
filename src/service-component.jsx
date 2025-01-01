@@ -3,6 +3,7 @@ import {Card, CardFooter, Image, Button} from "@nextui-org/react";
 export default function ServiceComponent() {
   return (
     <>
+    <div className="bg-stone-50 py-10">
     <p className="text-center mt-10 font-bold text-xl">Servis Yang Saya Sediakan</p>
     <div className="w-[90%] sm:w-[80%] my-10 mx-auto flex flex-wrap gap-10 items-center justify-center">
         <Card isFooterBlurred isPressable className="border-none w-80" radius="lg">
@@ -75,6 +76,7 @@ export default function ServiceComponent() {
                 </p>
             </CardFooter>
         </Card>
+    </div>
     </div>
     </>
   );

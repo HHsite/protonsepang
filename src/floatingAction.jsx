@@ -9,7 +9,7 @@ const FloatingActionButton = () => {
   return (
     <>
     
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50 md:hidden">
     {/* <a href="https://wa.me/+601129006155" target="_blank"> */}
     <Button
       isIconOnly
