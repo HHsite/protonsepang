@@ -31,7 +31,13 @@ export default function SwiperApp() {
   useEffect(() => {
     // Check if the device supports touch
     const checkTouchDevice = () => {
-      return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      // Check if the platform is iOS or contains touch support
+      const userAgent = navigator.userAgent;
+      return (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        /iPhone|iPad|iPod/.test(userAgent) // Handle iOS devices
+      );
     };
     setIsTouchDevice(checkTouchDevice());
   }, []);
@@ -50,33 +56,33 @@ export default function SwiperApp() {
         modules={[Navigation]}
         className="w-[90%] sm:w-[80%] my-10"
         breakpoints={{
-          1024: { allowTouchMove: isTouchDevice }, // Allow touch move only on touchscreen devices
-          1023: { allowTouchMove: isTouchDevice }, // Same here for smaller screens
+          // Ensure both larger and smaller screens (iPad/Tablet range) get touch behavior
+          1024: { allowTouchMove: isTouchDevice }, // Allow touch move only on touchscreen devices (on larger screens like iPad Pro)
+          768: { allowTouchMove: isTouchDevice },  // Allow touch move for iPads and tablets with smaller screens
+          0: { allowTouchMove: isTouchDevice },    // Allow touch move for mobile devices (just in case)
         }}
       >
         {carData.map((car, index) => (
           <SwiperSlide key={index}>
             <a href={car.url} target='_blank'>
-            <Card
-              className="py-4 w-[300px] h-[280px] bg-stone-50"
-              shadow="none"
-              isHoverable
-              // isPressable
-              // onPress={() => handlePress(car.url)}
-            >
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                <h4 className="font-bold text-large">{car.name}</h4>
-                <small className="text-default-500">{car.type}</small>
-              </CardHeader>
-              <CardBody className="overflow-visible py-2">
-                <Image
-                  alt="Car image"
-                  className="object-cover py-11 rounded-xl bg-transparent"
-                  src={car.imageUrl}
-                  width={270}
-                />
-              </CardBody>
-            </Card>
+              <Card
+                className="py-4 w-[300px] h-[280px] bg-stone-50"
+                shadow="none"
+                isHoverable
+              >
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                  <h4 className="font-bold text-large">{car.name}</h4>
+                  <small className="text-default-500">{car.type}</small>
+                </CardHeader>
+                <CardBody className="overflow-visible py-2">
+                  <Image
+                    alt="Car image"
+                    className="object-cover py-11 rounded-xl bg-transparent"
+                    src={car.imageUrl}
+                    width={270}
+                  />
+                </CardBody>
+              </Card>
             </a>
           </SwiperSlide>
         ))}
