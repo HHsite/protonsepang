@@ -6,6 +6,7 @@ import CardSliderComp from './card-slider'
 import SwiperApp from './card-swiper'
 import HeroSection from './hero-component'
 import FloatingActionButton from './floatingAction'
+import ServiceComponent from './service-component'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <NavbarSection />
       <HeroSection />
       <SwiperApp />
+      <ServiceComponent />
     </>
   )
 }
