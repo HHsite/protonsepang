@@ -26,9 +26,20 @@ const carData = [
 ];
 
 export default function SwiperApp() {
+  const [isSwiping, setIsSwiping] = useState(false);
 
   const handlePress = (url) => {
-    window.open(url, '_blank');
+    if (!isSwiping) {
+      window.open(url, '_blank');
+    }
+  };
+
+  const handleTouchStart = () => {
+    setIsSwiping(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsSwiping(false);
   };
 
   return (
@@ -41,19 +52,20 @@ export default function SwiperApp() {
         modules={[Navigation]}
         className="w-[90%] sm:w-[80%] my-10"
         breakpoints={{
-          1024: { allowTouchMove: false },
+          1024: { allowTouchMove: true },
           1023: { allowTouchMove: true },
         }}
       >
         {carData.map((car, index) => (
           <SwiperSlide key={index}>
-            {/* <a href='#' target='_blank'> */}
             <Card
               className="py-4 w-[300px] h-[280px] bg-stone-50"
               shadow="none"
               isHoverable
               isPressable
               onPress={() => handlePress(car.url)}
+              onTouchStart={handleTouchStart}  // Detect swipe start
+              onTouchEnd={handleTouchEnd}      // Detect swipe end
             >
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                 <h4 className="font-bold text-large">{car.name}</h4>
@@ -68,7 +80,6 @@ export default function SwiperApp() {
                 />
               </CardBody>
             </Card>
-            {/* </a> */}
           </SwiperSlide>
         ))}
       </Swiper>
