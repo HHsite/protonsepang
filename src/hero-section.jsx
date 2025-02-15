@@ -1,6 +1,6 @@
 import React from "react";
 import HeroVideo from './assets/proton-playback.mp4'
-import {Button} from "@nextui-org/button";
+import {Button} from "@heroui/button";
 
 export default function HeroSection() {
 

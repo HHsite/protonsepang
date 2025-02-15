@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image } from "@heroui/react";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
@@ -12,7 +12,6 @@ import s70Car from './assets/s70-car.png';
 import personaCar from './assets/persona-car.png';
 import sagaCar from './assets/saga-car.png';
 import irizCar from './assets/iriz-car.png';
-import exoraCar from './assets/exora-car.png';
 
 import x50Pricelist from './assets/x50-pricelist.pdf';
 import x70Pricelist from './assets/x70-pricelist.pdf';
@@ -30,7 +29,6 @@ const carData = [
   { name: "PERSONA", type: "Compact Sedan", imageUrl: personaCar, url: personaPricelist },
   { name: "SAGA", type: "Compact Sedan", imageUrl: sagaCar, url: sagaPricelist },
   { name: "IRIZ", type: "Hatchback", imageUrl: irizCar, url: irizPricelist },
-  { name: "EXORA", type: "MPV", imageUrl: exoraCar, url: exoraCar },
 ];
 
 export default function SwiperApp() {

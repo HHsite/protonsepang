@@ -1,4 +1,4 @@
-import {Card, CardBody, Image, Button, CardHeader, Divider} from "@nextui-org/react";
+import {Card, CardBody, Image, Button, CardHeader, Divider} from "@heroui/react";
 import x50Car from './assets/trade-in.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faCreativeCommonsPdAlt } from '@fortawesome/free-brands-svg-icons';
